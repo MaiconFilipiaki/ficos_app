@@ -1,3 +1,4 @@
+import 'package:ficos_app/components/ButtonActionPrimary.dart';
 import 'package:ficos_app/components/Input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -55,21 +56,11 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 10),
-                child: RaisedButton(
-                  child: Text(
-                    "LOGIN",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  color: Color(0xFF2CDBA3),
-                  padding: EdgeInsets.all(15),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(6)
-                  ),
-                  onPressed: (){},
+                child: ButtonActionPrimary(
+                    label: "LOGIN",
+                    onPressed: () {
+                      print("LOGIN");
+                    }
                 ),
               ),
               Row(
