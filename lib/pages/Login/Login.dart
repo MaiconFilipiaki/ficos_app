@@ -1,3 +1,4 @@
+import 'package:ficos_app/components/Input.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,10 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+
+  TextEditingController _controllerEmail;
+  TextEditingController _controllerPassword;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -32,48 +37,20 @@ class _LoginState extends State<Login> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: 0),
-                child: TextField(
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(20, 20, 32, 20),
-                      prefixIcon: Icon(Icons.email),
-                      hintText: 'E-mail',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.5),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6)
-                      )
-                  ),
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                child: InputCustomizado(
+                    controller: _controllerEmail,
+                    hint: 'E-mail',
+                    icon: Icons.email,
+                  type: TextInputType.emailAddress,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(top: 10),
-                child: TextField(
-                  autofocus: true,
-                  keyboardType: TextInputType.text,
-                  decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(20, 20, 32, 20),
-                      prefixIcon: Icon(Icons.lock),
-                      hintText: 'Senha',
-                      hintStyle: TextStyle(
-                        color: Colors.white,
-                      ),
-                      filled: true,
-                      fillColor: Colors.white.withOpacity(0.5),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(6)
-                      )
-                  ),
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+                child: InputCustomizado(
+                  controller: _controllerPassword,
+                  hint: 'Senha',
+                  icon: Icons.lock,
+                  obscure: true,
                 ),
               ),
               Padding(
@@ -117,7 +94,9 @@ class _LoginState extends State<Login> {
                       ),
                     ),
                     color: Colors.transparent,
-                    onPressed: (){},
+                    onPressed: (){
+                      Navigator.pushNamed(context, "/register");
+                    },
                   )
                 ],
               )
