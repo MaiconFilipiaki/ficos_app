@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 final ThemeData temaPadrao = ThemeData(
   primaryColor: Colors.black,
-  accentColor: Color(0x2CDBA3),
+  accentColor: Color(0xFF2CDBA3),
 );
 
 void main() {
