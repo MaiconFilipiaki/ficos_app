@@ -1,19 +1,5 @@
-import 'package:ficos_app/RouteGenerator.dart';
-import 'package:ficos_app/pages/Home/Home.dart';
+import 'package:ficos_app/app/app_module.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-final ThemeData temaPadrao = ThemeData(
-  primaryColor: Colors.black,
-  accentColor: Color(0xFF2CDBA3),
-);
-
-void main() {
-  runApp(
-    MaterialApp(
-      home: Home(),
-      debugShowCheckedModeBanner: false,
-      theme: temaPadrao,
-      onGenerateRoute: RouteGenerator.generateRoute,
-    )
-  );
-}
+void main() => runApp(ModularApp(module:  AppModule()));
