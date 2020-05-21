@@ -13,10 +13,6 @@ abstract class _RegisterControllerBase with Store {
 
   final api = Modular.get<RegisterRepository>();
 
-  _RegisterControllerBase() {
-    saveUser();
-  }
-
   @observable
   String textError = "";
 
