@@ -9,6 +9,21 @@ part of 'register_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$RegisterController on _RegisterControllerBase, Store {
+  final _$textErrorAtom = Atom(name: '_RegisterControllerBase.textError');
+
+  @override
+  String get textError {
+    _$textErrorAtom.reportRead();
+    return super.textError;
+  }
+
+  @override
+  set textError(String value) {
+    _$textErrorAtom.reportWrite(value, super.textError, () {
+      super.textError = value;
+    });
+  }
+
   final _$controllerNameAtom =
       Atom(name: '_RegisterControllerBase.controllerName');
 
@@ -57,23 +72,17 @@ mixin _$RegisterController on _RegisterControllerBase, Store {
     });
   }
 
-  final _$_RegisterControllerBaseActionController =
-      ActionController(name: '_RegisterControllerBase');
+  final _$saveUserAsyncAction = AsyncAction('_RegisterControllerBase.saveUser');
 
   @override
-  dynamic saveUser() {
-    final _$actionInfo = _$_RegisterControllerBaseActionController.startAction(
-        name: '_RegisterControllerBase.saveUser');
-    try {
-      return super.saveUser();
-    } finally {
-      _$_RegisterControllerBaseActionController.endAction(_$actionInfo);
-    }
+  Future saveUser() {
+    return _$saveUserAsyncAction.run(() => super.saveUser());
   }
 
   @override
   String toString() {
     return '''
+textError: ${textError},
 controllerName: ${controllerName},
 controllerEmail: ${controllerEmail},
 controllerPassword: ${controllerPassword}

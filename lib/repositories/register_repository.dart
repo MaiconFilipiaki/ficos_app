@@ -1,15 +1,21 @@
 import 'package:dio/dio.dart';
+import 'package:ficos_app/config/variables.dart';
+import 'package:ficos_app/models/user_model.dart';
+
 
 class RegisterRepository {
 
   final Dio _dio = Dio();
-  String url = "http://127.0.0.1";
+  String url = "${API}api/v1/user";
 
 
-  Future postUser() async {
-
-//    Response response = await _dio.post(url);
-
+  Future<User> postUser({User user}) async {
+    Response response = await _dio.post(url, data: user.toJson());
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      return User.fromJson(response.data);
+    }
   }
 
 

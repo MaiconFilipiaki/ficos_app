@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - validadores (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - validadores (from `.symlinks/plugins/validadores/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  validadores:
+    :path: ".symlinks/plugins/validadores/ios"
+
+SPEC CHECKSUMS:
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  validadores: 206300a4c79554790e2fc64e10917fe7db87dce1
+
+PODFILE CHECKSUM: c34e2287a9ccaa606aeceab922830efb9a6ff69a
+
+COCOAPODS: 1.8.0

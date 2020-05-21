@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:validadores/Validador.dart';
 import 'register_controller.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -12,6 +13,8 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends ModularState<RegisterPage, RegisterController> {
+
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +53,8 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
                                 fontWeight: FontWeight.bold,
                                 fontSize: 15
                             ),
-                          )                  ],
+                          ),
+                        ],
                       ),
                       color: Color(0xFF295396),
                       shape: RoundedRectangleBorder(
@@ -79,46 +83,97 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
                       ),
                     ],
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: <Widget>[
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                        child: InputCustomizado(
-                          controller: controller.controllerName,
-                          hint: "Nome",
-                          icon: Icons.person_outline,
+                  Form(
+                    key: _formKey,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: InputCustomizado(
+                            controller: this.controller.controllerName,
+                            hint: "Nome",
+                            icon: Icons.person_outline,
+                            validator: (valor) {
+                              return Validador()
+                                      .add(
+                                          Validar.OBRIGATORIO,
+                                          msg: "Campo obrigatorio"
+                                      )
+                                      .minLength(4)
+                                      .maxLength(10)
+                                      .valido(valor);
+                            },
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                        child: InputCustomizado(
-                          controller: controller.controllerEmail,
-                          hint: "E-mail",
-                          icon: Icons.email,
-                          type: TextInputType.emailAddress,
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: InputCustomizado(
+                            controller: this.controller.controllerEmail,
+                            hint: "E-mail",
+                            icon: Icons.email,
+                            type: TextInputType.emailAddress,
+                            validator: (valor) {
+                                return Validador()
+                                       .add(
+                                          Validar.OBRIGATORIO,
+                                          msg: "Campo obrigatorio"
+                                       )
+                                       .add(
+                                          Validar.EMAIL,
+                                          msg: "Digite um e-mail valido"
+                                       )
+                                       .minLength(4)
+                                       .maxLength(25)
+                                       .valido(valor);
+                            },
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                        child: InputCustomizado(
-                          controller: controller.controllerPassword,
-                          hint: "Senha",
-                          icon: Icons.lock,
-                          obscure: true,
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: InputCustomizado(
+                            controller: this.controller.controllerPassword,
+                            hint: "Senha",
+                            icon: Icons.lock,
+                            obscure: true,
+                            validator: (valor) {
+                              return Validador()
+                                      .add(
+                                          Validar.OBRIGATORIO,
+                                          msg: "Campo obrigatorio"
+                                      )
+                                      .minLength(6)
+                                      .maxLength(12)
+                                      .valido(valor);
+                            },
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
-                        child: ButtonActionPrimary(
-                            label: "Cadastre-se",
-                            onPressed: () {
-                              this.controller.saveUser();
-                            }
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: Text(
+                            this.controller.textError,
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
                         ),
-                      ),
-                    ],
-                  )
+                        Padding(
+                          padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+                          child: ButtonActionPrimary(
+                              label: "Cadastre-se",
+                              onPressed: () {
+                                if(_formKey.currentState.validate()) {
+                                  this.controller.saveUser();
+                                }
+                              }
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),

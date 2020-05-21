@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class InputCustomizado extends StatelessWidget {
 
   final TextEditingController controller;
+  final Function validator;
   final String hint;
   final bool autofocus;
   final bool obscure;
@@ -10,9 +11,10 @@ class InputCustomizado extends StatelessWidget {
   final IconData icon;
 
   InputCustomizado({
-    @required this.controller,
+    this.controller,
     @required this.hint,
     @required this.icon,
+    this.validator,
     this.obscure = false,
     this.autofocus = false,
     this.type = TextInputType.text,
@@ -20,8 +22,9 @@ class InputCustomizado extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextField(
+    return TextFormField(
       controller: this.controller,
+      validator: this.validator,
       autofocus: this.autofocus,
       keyboardType: this.type,
       obscureText: this.obscure,
