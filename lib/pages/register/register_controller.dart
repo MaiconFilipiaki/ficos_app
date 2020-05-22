@@ -35,6 +35,7 @@ abstract class _RegisterControllerBase with Store {
               email: controllerEmail.text
           )
         );
+        Modular.to.pop();
     } catch (exception) {
       if (exception.response == null || exception.response.statusCode == 500) {
         textError = "Houve um erro, por favor tente mais tarde!";
