@@ -1,4 +1,6 @@
+import 'package:dio/dio.dart';
 import 'package:ficos_app/app/app_widget.dart';
+import 'package:ficos_app/config/custom_dio.dart';
 import 'package:ficos_app/pages/Home/Home.dart';
 import 'package:ficos_app/pages/Login/login_controller.dart';
 import 'package:ficos_app/pages/Login/login_page.dart';

@@ -1,3 +1,5 @@
+import 'package:dio/dio.dart';
+import 'package:ficos_app/config/custom_dio.dart';
 import 'package:ficos_app/models/user_model.dart';
 import 'package:ficos_app/repositories/login_repository.dart';
 import 'package:flutter/cupertino.dart';
@@ -12,6 +14,7 @@ class LoginController = _LoginControllerBase with _$LoginController;
 abstract class _LoginControllerBase with Store {
 
   final api = Modular.get<LoginRepositoty>();
+//  final CustomApi = Modular.get<CustomDio>();
 
   @observable
   String textError = "";
@@ -44,6 +47,26 @@ abstract class _LoginControllerBase with Store {
         return;
       }
     }
+  }
+
+  refreshToken() async {
+    try {
+      User user = await api.returnUserSaveLocal();
+      String response = await api.login(
+          user: User(
+              email: user.email,
+              password: user.password
+          )
+      );
+      return response;
+    } catch (exception) {
+      print(exception);
+    }
+  }
+
+  getToken() async {
+    String token = await api.getToken();
+    return token;
   }
 
 }
