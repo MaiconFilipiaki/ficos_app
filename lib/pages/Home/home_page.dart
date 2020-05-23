@@ -42,7 +42,6 @@ class _HomeState extends ModularState<Home, HomeController> with SingleTickerPro
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: new TabBarView(
           controller: _controller,
           children: <Widget>[
