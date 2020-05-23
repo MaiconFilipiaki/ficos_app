@@ -1,9 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:ficos_app/app/app_widget.dart';
 import 'package:ficos_app/config/custom_dio.dart';
-import 'package:ficos_app/pages/Home/Home.dart';
+import 'package:ficos_app/pages/Home/home_page.dart';
+import 'package:ficos_app/pages/Home/home_controller.dart';
 import 'package:ficos_app/pages/Login/login_controller.dart';
 import 'package:ficos_app/pages/Login/login_page.dart';
+import 'package:ficos_app/pages/listPrompDelivery/listpromptdelivery_page.dart';
 import 'package:ficos_app/pages/register/register_controller.dart';
 import 'package:ficos_app/pages/register/register_page.dart';
 import 'package:ficos_app/repositories/login_repository.dart';
@@ -19,6 +21,7 @@ class AppModule extends MainModule {
     Bind((i) => RegisterController()),
     Bind((i) => LoginRepositoty()),
     Bind((i) => LoginController()),
+    Bind((i) => HomeController())
   ];
 
   @override
@@ -29,6 +32,7 @@ class AppModule extends MainModule {
     Router("/", child: (_, args) => Home()),
     Router("/login", child: (_, args) => Login()),
     Router("/register", child: (_, args) => RegisterPage()),
+    Router("/listPrompt", child: (_, args) => ListPrompDelivery()),
   ];
 
 }
