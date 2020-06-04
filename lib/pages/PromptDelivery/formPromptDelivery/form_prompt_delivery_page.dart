@@ -27,7 +27,9 @@ class _FormPromptDeliveryPageState extends ModularState<FormPromptDeliveryPage, 
               FlatButton(
                 textColor: Colors.white,
                 child: Text("Limpar"),
-                onPressed: (){},
+                onPressed: (){
+                  this.controller.controllerTitle.text = "";
+                },
               )
             ],
           ),

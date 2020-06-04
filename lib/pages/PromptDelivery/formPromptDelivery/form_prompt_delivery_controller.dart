@@ -31,6 +31,7 @@ abstract class _FormPromptDeliveryBase with Store {
             )
           );
       textSuccess = "Pronta entrega cadastrada com sucesso";
+      controllerTitle.text = "";
     } catch (expection) {
       if (expection.response = null || expection.response.statusCode == 500) {
         textError = "Houve um erro, por favor tente mais tarde";
