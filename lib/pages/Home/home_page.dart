@@ -1,9 +1,10 @@
 import 'package:ficos_app/pages/Announcement/Announcement.dart';
 import 'package:ficos_app/pages/Home/home_controller.dart';
 import 'package:ficos_app/pages/MyAnnouncements/MyAnnouncements.dart';
-import 'package:ficos_app/pages/listPrompDelivery/listpromptdelivery_page.dart';
+import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/listpromptdelivery_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,22 +13,23 @@ class Home extends StatefulWidget {
 
 class _HomeState extends ModularState<Home, HomeController> with SingleTickerProviderStateMixin {
 
-  TabController _controller;
+  TabController controllerTab;
+  final storage = new FlutterSecureStorage();
 
   @override
   void initState() {
     super.initState();
-    _controller = new TabController(length: 4, vsync: this);
-    _controller.addListener(() async {
-      if (
-        _controller.index == 1 ||
-        _controller.index == 2 ||
-        _controller.index == 3
-      ) {
+    controllerTab = new TabController(length: 4, vsync: this);
+    controllerTab.addListener(() async {
+
+      int indexPush = controllerTab.index;
+      if (indexPush == 1 || indexPush == 2 || indexPush == 3) {
         String token = await this.controller.verifyToken();
-        if (token.isEmpty) {
-          _controller.index = 0;
+        if (token == null) {
           Modular.to.pushNamed("/login");
+          controllerTab.index = 0;
+        } else {
+          controllerTab.index = indexPush;
         }
       }
     });
@@ -35,7 +37,7 @@ class _HomeState extends ModularState<Home, HomeController> with SingleTickerPro
 
   @override
   void dispose() {
-    _controller.dispose();
+    controllerTab.dispose();
     super.dispose();
   }
 
@@ -43,7 +45,8 @@ class _HomeState extends ModularState<Home, HomeController> with SingleTickerPro
   Widget build(BuildContext context) {
     return Scaffold(
       body: new TabBarView(
-          controller: _controller,
+          controller: controllerTab,
+
           children: <Widget>[
             new Announcement(),
             new MyAnnouncements(),
@@ -53,14 +56,14 @@ class _HomeState extends ModularState<Home, HomeController> with SingleTickerPro
       ),
       bottomNavigationBar: new Material(
         color: Colors.black,
-        child: new TabBar(
-          controller: _controller,
+        child: TabBar(
+           controller: controllerTab,
            indicatorColor: Colors.white,
            tabs: <Tab>[
-             new Tab(icon: new Icon(Icons.home)),
-             new Tab(icon: new Icon(Icons.chat)),
-             new Tab(icon: new Icon(Icons.edit)),
-             new Tab(icon: new Icon(Icons.people)),
+             Tab(icon: new Icon(Icons.home)),
+             Tab(icon: new Icon(Icons.chat)),
+             Tab(icon: new Icon(Icons.edit)),
+             Tab(icon: new Icon(Icons.people)),
            ]
         ),
       ),

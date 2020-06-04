@@ -34,9 +34,4 @@ class AuthIntrcetors extends InterceptorsWrapper {
 //    }
   }
 
-  @override
-  Future onResponse(Response response) {
-    print("RESPONSE[${response.statusCode}] => PATH: ${response.request.path}");
-  }
-
 }
