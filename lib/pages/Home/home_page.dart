@@ -1,7 +1,7 @@
 import 'package:ficos_app/pages/Announcement/Announcement.dart';
 import 'package:ficos_app/pages/Home/home_controller.dart';
 import 'package:ficos_app/pages/MyAnnouncements/MyAnnouncements.dart';
-import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/listpromptdelivery_page.dart';
+import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';

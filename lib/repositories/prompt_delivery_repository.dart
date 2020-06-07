@@ -14,7 +14,27 @@ class PromptDeliveryRepository {
     if (response.statusCode != 201) {
       throw Exception();
     } else {
-      return PromptDelivery.fromJson(response.data);
+      PromptDelivery promptDelivery = PromptDelivery.fromJson(response.data);
+      return promptDelivery;
+    }
+  }
+
+  Future<List<dynamic>> getFindAll() async {
+    Response response = await _httpClient.get(url);
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      List<dynamic> listPromptDelivery = response.data.map((i) => PromptDelivery.fromJson(i)).toList();
+      return listPromptDelivery;
+    }
+  }
+
+  Future<String> deletePromptDelivery(id) async {
+    Response response = await _httpClient.delete("$url?id=$id");
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      return 'ok';
     }
   }
 

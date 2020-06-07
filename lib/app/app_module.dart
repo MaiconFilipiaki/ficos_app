@@ -7,7 +7,8 @@ import 'package:ficos_app/pages/Login/login_controller.dart';
 import 'package:ficos_app/pages/Login/login_page.dart';
 import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_delivery_controller.dart';
 import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_delivery_page.dart';
-import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/listpromptdelivery_page.dart';
+import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_controller.dart';
+import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_page.dart';
 import 'package:ficos_app/pages/register/register_controller.dart';
 import 'package:ficos_app/pages/register/register_page.dart';
 import 'package:ficos_app/repositories/login_repository.dart';
@@ -26,7 +27,8 @@ class AppModule extends MainModule {
     Bind((i) => LoginController()),
     Bind((i) => HomeController()),
     Bind((i) => PromptDeliveryRepository()),
-    Bind((i) => FormPromptDeliveryController())
+    Bind((i) => FormPromptDeliveryController()),
+    Bind((i) => ListPromptDeliveryController())
   ];
 
   @override
