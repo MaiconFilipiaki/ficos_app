@@ -21,7 +21,7 @@ class _ListPrompDeliveryState extends ModularState<ListPrompDelivery, ListPrompt
           body: Container(
             child: ListView.builder(
                 itemCount: this.controller.listApresentation.length,
-                itemBuilder: (BuildContext context, int index) {
+                itemBuilder: (BuildContext contextBuild, int index) {
                   return Dismissible(
                       key: UniqueKey(),
                       child: ListTile(
@@ -85,7 +85,10 @@ class _ListPrompDeliveryState extends ModularState<ListPrompDelivery, ListPrompt
                               )
                           );
                         } else {
-                          print("EDIT TESTE");
+                          this.controller.editPromptDelivery(
+                              this.controller.listApresentation[index],
+                              index
+                          );
                         }
                       },
                   );

@@ -5,6 +5,7 @@ import 'package:ficos_app/pages/Home/home_page.dart';
 import 'package:ficos_app/pages/Home/home_controller.dart';
 import 'package:ficos_app/pages/Login/login_controller.dart';
 import 'package:ficos_app/pages/Login/login_page.dart';
+import 'package:ficos_app/pages/PromptDelivery/editPromptDelivery/edit_prompt_delivery_page.dart';
 import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_delivery_controller.dart';
 import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_delivery_page.dart';
 import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_controller.dart';
@@ -40,7 +41,12 @@ class AppModule extends MainModule {
     Router("/login", child: (_, args) => Login()),
     Router("/register", child: (_, args) => RegisterPage()),
     Router("/listPrompt", child: (_, args) => ListPrompDelivery()),
-    Router("/formPrompt", child: (_, args) => FormPromptDeliveryPage())
+    Router("/formPrompt", child: (_, args) => FormPromptDeliveryPage()),
+    Router(
+        "/editPromptDelivery",
+        child: (_, args) =>
+            EditPromptDeliveryPage(promptEdit: args.data)
+    )
   ];
 
 }

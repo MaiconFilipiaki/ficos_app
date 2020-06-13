@@ -40,7 +40,11 @@ abstract class _ListPromptDeliveryBase with Store {
     } catch (err) {
       print(err);
     }
+  }
 
+  @action
+  editPromptDelivery(@required PromptDelivery promptDelivery, @required int index) {
+    Modular.to.pushNamed('/editPromptDelivery', arguments: promptDelivery);
   }
 
 }

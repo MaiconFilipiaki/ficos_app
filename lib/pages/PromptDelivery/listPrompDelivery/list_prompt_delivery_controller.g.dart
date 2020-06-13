@@ -42,6 +42,21 @@ mixin _$ListPromptDeliveryController on _ListPromptDeliveryBase, Store {
     return _$deleteItemAsyncAction.run(() => super.deleteItem(index));
   }
 
+  final _$_ListPromptDeliveryBaseActionController =
+      ActionController(name: '_ListPromptDeliveryBase');
+
+  @override
+  dynamic editPromptDelivery(
+      @required PromptDelivery promptDelivery, @required int index) {
+    final _$actionInfo = _$_ListPromptDeliveryBaseActionController.startAction(
+        name: '_ListPromptDeliveryBase.editPromptDelivery');
+    try {
+      return super.editPromptDelivery(promptDelivery, index);
+    } finally {
+      _$_ListPromptDeliveryBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
