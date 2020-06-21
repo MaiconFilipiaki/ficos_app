@@ -1,5 +1,14 @@
+import 'dart:async';
+
+import 'package:ficos_app/components/Input.dart';
 import 'package:ficos_app/models/prompt_delivery_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'edit_prompt_delivery_controller.dart';
+import 'package:geolocator/geolocator.dart';
 
 class EditPromptDeliveryPage extends StatefulWidget {
 
@@ -11,14 +20,175 @@ class EditPromptDeliveryPage extends StatefulWidget {
   _EditPromptDeliveryPageState createState() => _EditPromptDeliveryPageState();
 }
 
-class _EditPromptDeliveryPageState extends State<EditPromptDeliveryPage> {
+class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, EditPromptDeliveryController> {
+
+ _recup() async {
+   Position position = await Geolocator().getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
+ }
+
+  @override
+  void initState() {
+    super.initState();
+    this.controller.textTeste = new TextEditingController(text: widget.promptEdit.name);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Observer(builder: (_) {
+      return Scaffold(
       appBar: AppBar(
         title: Text(widget.promptEdit.name),
       ),
+      body: Container(
+        color: Colors.black.withOpacity(0.6),
+        padding: EdgeInsets.all(16),
+        child: Column(
+          children: <Widget>[
+            InputCustomizado(
+              hint: "Nome da pronta entrega",
+              icon: Icons.edit,
+              controller: this.controller.textTeste,
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+              child: Wrap(
+                children: <Widget>[
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width,
+                    height: 200,
+                    child: GoogleMap(
+                      mapType: MapType.normal,
+                      myLocationButtonEnabled: false,
+                      initialCameraPosition: this.controller.cameraPositionMap,
+                      zoomGesturesEnabled: true,
+                      onMapCreated: (GoogleMapController controller) {
+                        this.controller.completedMap(controller);
+                      },
+                      circles: this.controller.circle,
+                    ),
+                  ),
+                  Slider(
+                      value: this.controller.valueSlide,
+                      min: 100,
+                      max: 4000,
+                      label: (this.controller.valueSlide).toString(),
+                      divisions: 40,
+                      activeColor: Color(0xFF2CDBA3),
+                      onChanged: (double result) {
+                        this.controller.changeRadiusSlide(result);
+                      }
+                  )
+                ],
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                  child: Divider(
+                    color: Colors.white,
+                  ),
+                ),
+                Text(
+                  "Itens",
+                  style: TextStyle(
+                      color: Colors.white
+                  ),
+                ),
+                Expanded(
+                  child: Divider(
+                    color: Colors.white,
+                  ),
+                ),
+              ],
+            ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(0, 5, 0, 5),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.white,
+                        )
+                    ),
+                    child: Column(
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.all(10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Image.asset(
+                                "imgs/image-not-found.png",
+                                width: 70,
+                                height: 70,
+                              ),
+                              Container(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: <Widget>[
+                                    Text(
+                                      "Horizon Dawn",
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: EdgeInsets.only(top: 10),
+                                      child: Text(
+                                        "R 24,90",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Divider(
+                            color: Colors.white,
+                        ),
+                        OutlineButton(
+                          borderSide: BorderSide(
+                            width: 0,
+                            color: Colors.black.withOpacity(0.0),
+                          ),
+                          color: Colors.black.withOpacity(0.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              Text(
+                                "EDITAR",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15
+                                ),
+                              ),
+                              Icon(
+                                Icons.arrow_forward_ios,
+                                color: Colors.white,
+                              )
+                            ],
+                          ),
+                          onPressed: (){},
+                        )
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
+      ),
     );
+    });
   }
 }
 

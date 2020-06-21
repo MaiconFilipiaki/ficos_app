@@ -6,6 +6,7 @@ import 'package:ficos_app/pages/Home/home_controller.dart';
 import 'package:ficos_app/pages/Login/login_controller.dart';
 import 'package:ficos_app/pages/Login/login_page.dart';
 import 'package:ficos_app/pages/PromptDelivery/editPromptDelivery/edit_prompt_delivery_page.dart';
+import 'package:ficos_app/pages/PromptDelivery/editPromptDelivery/edit_prompt_delivery_controller.dart';
 import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_delivery_controller.dart';
 import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_delivery_page.dart';
 import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_controller.dart';
@@ -29,7 +30,8 @@ class AppModule extends MainModule {
     Bind((i) => HomeController()),
     Bind((i) => PromptDeliveryRepository()),
     Bind((i) => FormPromptDeliveryController()),
-    Bind((i) => ListPromptDeliveryController())
+    Bind((i) => ListPromptDeliveryController()),
+    Bind((i) => EditPromptDeliveryController())
   ];
 
   @override
