@@ -40,34 +40,95 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     });
   }
 
-  final _$latitudeUserAtom = Atom(name: '_EditPromptDeliveryBase.latitudeUser');
+  final _$latitudePromptAtom =
+      Atom(name: '_EditPromptDeliveryBase.latitudePrompt');
 
   @override
-  double get latitudeUser {
-    _$latitudeUserAtom.reportRead();
-    return super.latitudeUser;
+  double get latitudePrompt {
+    _$latitudePromptAtom.reportRead();
+    return super.latitudePrompt;
   }
 
   @override
-  set latitudeUser(double value) {
-    _$latitudeUserAtom.reportWrite(value, super.latitudeUser, () {
-      super.latitudeUser = value;
+  set latitudePrompt(double value) {
+    _$latitudePromptAtom.reportWrite(value, super.latitudePrompt, () {
+      super.latitudePrompt = value;
     });
   }
 
-  final _$longitudeUserAtom =
-      Atom(name: '_EditPromptDeliveryBase.longitudeUser');
+  final _$longitudePromptAtom =
+      Atom(name: '_EditPromptDeliveryBase.longitudePrompt');
 
   @override
-  double get longitudeUser {
-    _$longitudeUserAtom.reportRead();
-    return super.longitudeUser;
+  double get longitudePrompt {
+    _$longitudePromptAtom.reportRead();
+    return super.longitudePrompt;
   }
 
   @override
-  set longitudeUser(double value) {
-    _$longitudeUserAtom.reportWrite(value, super.longitudeUser, () {
-      super.longitudeUser = value;
+  set longitudePrompt(double value) {
+    _$longitudePromptAtom.reportWrite(value, super.longitudePrompt, () {
+      super.longitudePrompt = value;
+    });
+  }
+
+  final _$reachAtom = Atom(name: '_EditPromptDeliveryBase.reach');
+
+  @override
+  dynamic get reach {
+    _$reachAtom.reportRead();
+    return super.reach;
+  }
+
+  @override
+  set reach(dynamic value) {
+    _$reachAtom.reportWrite(value, super.reach, () {
+      super.reach = value;
+    });
+  }
+
+  final _$idAtom = Atom(name: '_EditPromptDeliveryBase.id');
+
+  @override
+  int get id {
+    _$idAtom.reportRead();
+    return super.id;
+  }
+
+  @override
+  set id(int value) {
+    _$idAtom.reportWrite(value, super.id, () {
+      super.id = value;
+    });
+  }
+
+  final _$textSuccessAtom = Atom(name: '_EditPromptDeliveryBase.textSuccess');
+
+  @override
+  String get textSuccess {
+    _$textSuccessAtom.reportRead();
+    return super.textSuccess;
+  }
+
+  @override
+  set textSuccess(String value) {
+    _$textSuccessAtom.reportWrite(value, super.textSuccess, () {
+      super.textSuccess = value;
+    });
+  }
+
+  final _$textErrorAtom = Atom(name: '_EditPromptDeliveryBase.textError');
+
+  @override
+  String get textError {
+    _$textErrorAtom.reportRead();
+    return super.textError;
+  }
+
+  @override
+  set textError(String value) {
+    _$textErrorAtom.reportWrite(value, super.textError, () {
+      super.textError = value;
     });
   }
 
@@ -134,6 +195,15 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     return _$positionOfUserAsyncAction.run(() => super.positionOfUser());
   }
 
+  final _$savePromptDeliveryAsyncAction =
+      AsyncAction('_EditPromptDeliveryBase.savePromptDelivery');
+
+  @override
+  Future savePromptDelivery() {
+    return _$savePromptDeliveryAsyncAction
+        .run(() => super.savePromptDelivery());
+  }
+
   final _$_EditPromptDeliveryBaseActionController =
       ActionController(name: '_EditPromptDeliveryBase');
 
@@ -153,8 +223,12 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     return '''
 controllerMap: ${controllerMap},
 textTeste: ${textTeste},
-latitudeUser: ${latitudeUser},
-longitudeUser: ${longitudeUser},
+latitudePrompt: ${latitudePrompt},
+longitudePrompt: ${longitudePrompt},
+reach: ${reach},
+id: ${id},
+textSuccess: ${textSuccess},
+textError: ${textError},
 cameraPositionMap: ${cameraPositionMap},
 valueSlide: ${valueSlide},
 circle: ${circle}

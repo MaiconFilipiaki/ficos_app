@@ -37,6 +37,11 @@ class HttpClient {
     return _client.delete(url);
   }
 
+  Future<Response> put(String url, data) async {
+    await _interceptor();
+    return _client.put(url, data: data);
+  }
+
   Future lock() {
      _client.lock();
   }

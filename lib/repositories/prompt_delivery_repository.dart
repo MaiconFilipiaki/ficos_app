@@ -19,6 +19,16 @@ class PromptDeliveryRepository {
     }
   }
 
+  Future<PromptDelivery> updatePromptDelivery({@required PromptDelivery promptDelivery}) async {
+    Response response = await _httpClient.put("$url?id=${promptDelivery.id}", promptDelivery.toJson());
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      PromptDelivery promptDelivery = PromptDelivery.fromJson(response.data);
+      return promptDelivery;
+    }
+  }
+
   Future<List<dynamic>> getFindAll() async {
     Response response = await _httpClient.get(url);
     if (response.statusCode != 200) {
