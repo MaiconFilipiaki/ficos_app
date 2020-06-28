@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:ficos_app/components/ButtonActionPrimary.dart';
 import 'package:ficos_app/components/Input.dart';
+import 'package:ficos_app/models/item.dart';
 import 'package:ficos_app/models/prompt_delivery_model.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -305,6 +306,19 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        backgroundColor: Colors.black,
+        onPressed: (){
+            Modular.to.pushNamed(
+                '/formItem',
+                arguments: Item()
+            );
+        },
       ),
     );
     });

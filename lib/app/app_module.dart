@@ -11,8 +11,11 @@ import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_de
 import 'package:ficos_app/pages/PromptDelivery/formPromptDelivery/form_prompt_delivery_page.dart';
 import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_controller.dart';
 import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_page.dart';
+import 'package:ficos_app/pages/item/formItem/form_item_controller.dart';
+import 'package:ficos_app/pages/item/formItem/form_item_page.dart';
 import 'package:ficos_app/pages/register/register_controller.dart';
 import 'package:ficos_app/pages/register/register_page.dart';
+import 'package:ficos_app/repositories/item_repository.dart';
 import 'package:ficos_app/repositories/login_repository.dart';
 import 'package:ficos_app/repositories/prompt_delivery_repository.dart';
 import 'package:ficos_app/repositories/register_repository.dart';
@@ -31,7 +34,9 @@ class AppModule extends MainModule {
     Bind((i) => PromptDeliveryRepository()),
     Bind((i) => FormPromptDeliveryController()),
     Bind((i) => ListPromptDeliveryController()),
-    Bind((i) => EditPromptDeliveryController())
+    Bind((i) => EditPromptDeliveryController()),
+    Bind((i) => ItemRepository()),
+    Bind((i) => FormItemController())
   ];
 
   @override
@@ -48,7 +53,11 @@ class AppModule extends MainModule {
         "/editPromptDelivery",
         child: (_, args) =>
             EditPromptDeliveryPage(promptEdit: args.data)
-    )
+    ),
+    Router(
+        "/formItem",
+        child: (_, args) => FormItemPage(itemEdit: args.data)
+    ),
   ];
 
 }

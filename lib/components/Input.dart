@@ -9,6 +9,7 @@ class InputCustomizado extends StatelessWidget {
   final bool obscure;
   final TextInputType type;
   final IconData icon;
+  final dynamic formatter;
 
   InputCustomizado({
     this.controller,
@@ -18,6 +19,7 @@ class InputCustomizado extends StatelessWidget {
     this.obscure = false,
     this.autofocus = false,
     this.type = TextInputType.text,
+    this.formatter,
   });
 
   @override
@@ -28,6 +30,7 @@ class InputCustomizado extends StatelessWidget {
       autofocus: this.autofocus,
       keyboardType: this.type,
       obscureText: this.obscure,
+      inputFormatters: this.formatter,
       decoration: InputDecoration(
           contentPadding: EdgeInsets.fromLTRB(20, 20, 32, 20),
           prefixIcon: Icon(this.icon),
