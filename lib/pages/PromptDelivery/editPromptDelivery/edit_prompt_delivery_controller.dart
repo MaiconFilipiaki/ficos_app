@@ -50,10 +50,27 @@ abstract class _EditPromptDeliveryBase with Store {
   String textError = "";
 
   @observable
+  List<dynamic> itens = [];
+
+  @observable
   CameraPosition cameraPositionMap = CameraPosition(
       target: LatLng(-29.626117, -50.848332),
       zoom: 15
   );
+
+  @action
+  getPromptDelivery() async {
+    if (this.id != null) {
+      try {
+        PromptDelivery promptDeliveryFromServer = await this.repositoryPromptDelivery.getById(this.id.toString());
+        var listItens = promptDeliveryFromServer.items;
+        itens = listItens;
+        print(promptDeliveryFromServer);
+      } catch (err) {
+        print(err);
+      }
+    }
+  }
 
   @action
   completedMap(GoogleMapController controller) {

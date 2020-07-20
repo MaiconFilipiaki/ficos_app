@@ -39,6 +39,16 @@ class PromptDeliveryRepository {
     }
   }
 
+  Future<PromptDelivery> getById(String idPromptDelivery) async {
+    Response response = await _httpClient.get("$url?id=$idPromptDelivery");
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      PromptDelivery promptDelivery = PromptDelivery.fromJson(response.data);
+      return promptDelivery;
+    }
+  }
+  
   Future<String> deletePromptDelivery(id) async {
     Response response = await _httpClient.delete("$url?id=$id");
     if (response.statusCode != 200) {

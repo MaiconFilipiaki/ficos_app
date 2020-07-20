@@ -4,6 +4,7 @@ import 'package:brasil_fields/brasil_fields.dart';
 import 'package:ficos_app/components/ButtonActionPrimary.dart';
 import 'package:ficos_app/components/Input.dart';
 import 'package:ficos_app/models/item.dart';
+import 'package:ficos_app/models/itemTransition.dart';
 import 'package:ficos_app/pages/item/formItem/form_item_controller.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,7 @@ import 'package:validadores/Validador.dart';
 
 class FormItemPage extends StatefulWidget {
 
-  final Item itemEdit;
+  final ItemTransition itemEdit;
 
   FormItemPage({ this.itemEdit });
 
@@ -196,7 +197,7 @@ class _FormItemPageState extends ModularState<FormItemPage, FormItemController> 
                 ButtonActionPrimary(
                   label: "Salvar",
                   onPressed: () {
-                    this.controller.sendFile();
+                    this.controller.registerItem();
                   },
                 )
               ],

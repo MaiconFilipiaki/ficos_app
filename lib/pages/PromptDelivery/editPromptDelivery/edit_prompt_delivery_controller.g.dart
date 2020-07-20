@@ -132,6 +132,21 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     });
   }
 
+  final _$itensAtom = Atom(name: '_EditPromptDeliveryBase.itens');
+
+  @override
+  List<dynamic> get itens {
+    _$itensAtom.reportRead();
+    return super.itens;
+  }
+
+  @override
+  set itens(List<dynamic> value) {
+    _$itensAtom.reportWrite(value, super.itens, () {
+      super.itens = value;
+    });
+  }
+
   final _$cameraPositionMapAtom =
       Atom(name: '_EditPromptDeliveryBase.cameraPositionMap');
 
@@ -176,6 +191,14 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     _$circleAtom.reportWrite(value, super.circle, () {
       super.circle = value;
     });
+  }
+
+  final _$getPromptDeliveryAsyncAction =
+      AsyncAction('_EditPromptDeliveryBase.getPromptDelivery');
+
+  @override
+  Future getPromptDelivery() {
+    return _$getPromptDeliveryAsyncAction.run(() => super.getPromptDelivery());
   }
 
   final _$changeRadiusSlideAsyncAction =
@@ -229,6 +252,7 @@ reach: ${reach},
 id: ${id},
 textSuccess: ${textSuccess},
 textError: ${textError},
+itens: ${itens},
 cameraPositionMap: ${cameraPositionMap},
 valueSlide: ${valueSlide},
 circle: ${circle}

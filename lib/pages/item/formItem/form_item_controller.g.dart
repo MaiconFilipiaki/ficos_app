@@ -12,13 +12,13 @@ mixin _$FormItemController on _FormItemBase, Store {
   final _$itemAtom = Atom(name: '_FormItemBase.item');
 
   @override
-  Item get item {
+  ItemTransition get item {
     _$itemAtom.reportRead();
     return super.item;
   }
 
   @override
-  set item(Item value) {
+  set item(ItemTransition value) {
     _$itemAtom.reportWrite(value, super.item, () {
       super.item = value;
     });
@@ -98,11 +98,18 @@ mixin _$FormItemController on _FormItemBase, Store {
     return _$removeImageAsyncAction.run(() => super.removeImage(index));
   }
 
+  final _$registerItemAsyncAction = AsyncAction('_FormItemBase.registerItem');
+
+  @override
+  Future<dynamic> registerItem() {
+    return _$registerItemAsyncAction.run(() => super.registerItem());
+  }
+
   final _$sendFileAsyncAction = AsyncAction('_FormItemBase.sendFile');
 
   @override
-  Future<dynamic> sendFile() {
-    return _$sendFileAsyncAction.run(() => super.sendFile());
+  Future<dynamic> sendFile(String idItem) {
+    return _$sendFileAsyncAction.run(() => super.sendFile(idItem));
   }
 
   @override

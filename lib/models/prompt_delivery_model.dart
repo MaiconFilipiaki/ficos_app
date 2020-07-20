@@ -1,9 +1,12 @@
+import 'package:ficos_app/models/item.dart';
+
 class PromptDelivery {
   int id;
   String name;
   double latitude;
   double longitude;
   dynamic reach;
+  List<dynamic> items;
 
   PromptDelivery({
     this.id,
@@ -11,6 +14,7 @@ class PromptDelivery {
     this.latitude,
     this.longitude,
     this.reach,
+    this.items,
   });
 
   factory PromptDelivery.fromJson(Map doc) {
@@ -19,7 +23,8 @@ class PromptDelivery {
       name: doc['name'],
       latitude: doc['latitude'],
       longitude: doc['longitude'],
-      reach: doc['reach']
+      reach: doc['reach'],
+      items: doc['items'].map((i) => Item.fromJson(i)).toList()
     );
   }
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:ficos_app/models/item.dart';
+import 'package:ficos_app/models/itemTransition.dart';
 import 'package:ficos_app/repositories/item_repository.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -15,7 +16,7 @@ abstract class _FormItemBase with Store {
   final repositoryItem = Modular.get<ItemRepository>();
 
   @observable
-  Item item;
+  ItemTransition item;
 
   @observable
   String text = "";
@@ -47,8 +48,30 @@ abstract class _FormItemBase with Store {
   }
 
   @action
-  Future sendFile() async {
-    String response = await repositoryItem.uploadImage(this.listFile[0]);
+  Future registerItem() async {
+    try {
+      Item newItem = new Item(
+          description: textDescription.text,
+          price: textPrice.text
+      );
+      Item itemResponse = await repositoryItem.registerItem(
+          newItem,
+          item.idPromptDelivery.toString()
+      );
+      this.sendFile(itemResponse.id.toString());
+      print(itemResponse);
+    } catch (err) {
+      print('ERROR' + err);
+    }
+  }
+
+
+  @action
+  Future sendFile(String idItem) async {
+    for (int i = 0; i < listFile.length; i++) {
+      String response = await repositoryItem.uploadImage(listFile[i], idItem);
+    }
+    Modular.to.pop();
   }
 
 }
