@@ -25,13 +25,13 @@ mixin _$ListPromptDeliveryController on _ListPromptDeliveryBase, Store {
     });
   }
 
-  final _$_getListPromptDeliveryAsyncAction =
-      AsyncAction('_ListPromptDeliveryBase._getListPromptDelivery');
+  final _$getListPromptDeliveryAsyncAction =
+      AsyncAction('_ListPromptDeliveryBase.getListPromptDelivery');
 
   @override
-  Future _getListPromptDelivery() {
-    return _$_getListPromptDeliveryAsyncAction
-        .run(() => super._getListPromptDelivery());
+  Future getListPromptDelivery() {
+    return _$getListPromptDeliveryAsyncAction
+        .run(() => super.getListPromptDelivery());
   }
 
   final _$deleteItemAsyncAction =

@@ -102,7 +102,9 @@ class _ListPrompDeliveryState extends ModularState<ListPrompDelivery, ListPrompt
             ),
             backgroundColor: Colors.black,
             onPressed: (){
-              Modular.to.pushNamed("/formPrompt");
+              Modular.to.pushNamed("/formPrompt").then((value) => {
+                this.controller.getListPromptDelivery()
+              });
             },
           ),
         );

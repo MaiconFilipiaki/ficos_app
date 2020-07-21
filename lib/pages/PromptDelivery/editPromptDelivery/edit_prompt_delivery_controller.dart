@@ -17,7 +17,7 @@ abstract class _EditPromptDeliveryBase with Store {
 
 
   _EditPromptDeliveryBase(){
-    this.positionOfUser();
+//    this.positionOfUser();
   }
 
 
@@ -27,8 +27,10 @@ abstract class _EditPromptDeliveryBase with Store {
   @observable
   TextEditingController textTeste = new TextEditingController();
 
+  @observable
   double latitudeUser = -29.626117;
 
+  @observable
   double longitudeUser = -50.848332;
 
   @observable
@@ -134,8 +136,7 @@ abstract class _EditPromptDeliveryBase with Store {
 
   @action
   positionOfUser() async {
-    Position position = await Geolocator()
-        .getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator().getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
     print('AQUI MAICON' + this.latitudePrompt.toString() + this.longitudeUser.toString() + reach.toString());
     if (this.latitudePrompt != null && this.longitudeUser != null && reach != null) {
       this.latitudeUser = this.latitudePrompt;
@@ -177,8 +178,23 @@ abstract class _EditPromptDeliveryBase with Store {
               zoom: 15
           ))
       );
-
+      return;
     }
+    this.circle = Set.from([Circle(
+        center: LatLng(latitudeUser, longitudeUser),
+        circleId: CircleId("4554"),
+        radius: 100,
+        fillColor: Color(0xFF2CDBA3).withOpacity(0.5),
+        strokeColor: Color(0xFF2CDBA3),
+        strokeWidth: 3
+    )]);
+    GoogleMapController googleMapController = await this.controllerMap.future;
+    googleMapController.animateCamera(
+        CameraUpdate.newCameraPosition(CameraPosition(
+            target: LatLng(latitudeUser, longitudeUser),
+            zoom: 15
+        ))
+    );
   }
 
   @action

@@ -3,12 +3,14 @@ class ItemTransition {
   int idPromptDelivery;
   String description;
   String price;
+  List<dynamic> imgs = [];
 
   ItemTransition({
     this.id,
     this.idPromptDelivery,
     this.description,
-    this.price
+    this.price,
+    this.imgs,
   });
 
 }

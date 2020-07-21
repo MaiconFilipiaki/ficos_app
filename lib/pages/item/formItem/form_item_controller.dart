@@ -28,13 +28,16 @@ abstract class _FormItemBase with Store {
   TextEditingController textPrice = new TextEditingController();
 
   @observable
-  List<File> listFile = List();
+  List<dynamic> listFile = [];
+
+  @observable
+  List<String> listFileRemove = [];
 
   @action
   Future addImage() async {
     var imgSelected = await ImagePicker().getImage(source: ImageSource.gallery);
     if (imgSelected != null) {
-      List<File> newListFile = this.listFile;
+      List<dynamic> newListFile = this.listFile;
       newListFile.add(File(imgSelected.path));
       this.listFile = newListFile;
     }
@@ -42,7 +45,12 @@ abstract class _FormItemBase with Store {
 
   @action
   Future removeImage(int index) async {
-    List<File> newListFile = this.listFile;
+    List<dynamic> newListFile = this.listFile;
+    if (newListFile[index] is String) {
+      List<dynamic> newListFileRemove = this.listFileRemove;
+      newListFileRemove.add(newListFile[index]);
+      this.listFileRemove = newListFileRemove;
+    }
     newListFile.removeAt(index);
     this.listFile = newListFile;
   }
@@ -50,16 +58,29 @@ abstract class _FormItemBase with Store {
   @action
   Future registerItem() async {
     try {
-      Item newItem = new Item(
+      if (item.id == null) {
+        Item newItem = new Item(
+            description: textDescription.text,
+            price: textPrice.text
+        );
+        Item itemResponse = await repositoryItem.registerItem(
+            newItem,
+            item.idPromptDelivery.toString()
+        );
+        this.sendFile(itemResponse.id.toString());
+        print(itemResponse);
+      } else {
+        Item updateItem = new Item(
           description: textDescription.text,
           price: textPrice.text
-      );
-      Item itemResponse = await repositoryItem.registerItem(
-          newItem,
-          item.idPromptDelivery.toString()
-      );
-      this.sendFile(itemResponse.id.toString());
-      print(itemResponse);
+        );
+        Item itemResponse = await repositoryItem.updateItem(
+          updateItem,
+          item.idPromptDelivery.toString(),
+          item.id.toString(),
+        );
+        this.sendFile(item.id.toString());
+      }
     } catch (err) {
       print('ERROR' + err);
     }
@@ -69,9 +90,17 @@ abstract class _FormItemBase with Store {
   @action
   Future sendFile(String idItem) async {
     for (int i = 0; i < listFile.length; i++) {
-      String response = await repositoryItem.uploadImage(listFile[i], idItem);
+      if (listFile[i] is File) {
+        String response = await repositoryItem.uploadImage(listFile[i], idItem);
+      }
     }
-    Modular.to.pop();
+    for (int i = 0; i < listFileRemove.length; i++) {
+      print(listFileRemove[i]);
+      List<String> splitString = listFileRemove[i].split('/');
+      String nameFile = splitString[splitString.length - 1];
+      String response = await repositoryItem.deleteImgItem(nameFile, idItem);
+    }
+    Modular.to.pop("Teste");
   }
 
 }

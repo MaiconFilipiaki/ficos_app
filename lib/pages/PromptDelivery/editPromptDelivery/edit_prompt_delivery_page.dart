@@ -33,13 +33,14 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
   @override
   void initState() {
     super.initState();
+    this.controller.getPromptDelivery();
     this.controller.textTeste = new TextEditingController(text: widget.promptEdit.name);
     print('AQUI MAICON 1' +  widget.promptEdit.reach.toString());
     this.controller.latitudePrompt = widget.promptEdit.latitude;
     this.controller.longitudePrompt = widget.promptEdit.longitude;
     this.controller.reach = widget.promptEdit.reach;
     this.controller.id = widget.promptEdit.id;
-    this.controller.getPromptDelivery();
+    this.controller.positionOfUser();
   }
 
   _convertString(dynamic e) {
@@ -54,6 +55,7 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
 
   @override
   Widget build(BuildContext context) {
+
     return Observer(builder: (_) {
       return Scaffold(
       appBar: AppBar(
@@ -219,9 +221,23 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
                                     fontSize: 15
                                 ),
                               ),
-                              Icon(
-                                Icons.arrow_forward_ios,
-                                color: Colors.white,
+                              IconButton(
+                                icon: Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
+                                ),
+                                onPressed: (){
+                                  Modular.to.pushNamed(
+                                      '/formItem',
+                                      arguments: ItemTransition(
+                                        idPromptDelivery: this.controller.id,
+                                        price: e.price,
+                                        description: e.description,
+                                        id: e.id,
+                                        imgs: e.imgs,
+                                      )
+                                  );
+                                },
                               )
                             ],
                           ),
@@ -248,7 +264,9 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
                 arguments: ItemTransition(
                   idPromptDelivery: this.controller.id,
                 )
-            );
+            ).then((value) => {
+              this.controller.getPromptDelivery()
+            });
         },
       ),
     );

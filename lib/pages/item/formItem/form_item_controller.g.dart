@@ -72,15 +72,30 @@ mixin _$FormItemController on _FormItemBase, Store {
   final _$listFileAtom = Atom(name: '_FormItemBase.listFile');
 
   @override
-  List<File> get listFile {
+  List<dynamic> get listFile {
     _$listFileAtom.reportRead();
     return super.listFile;
   }
 
   @override
-  set listFile(List<File> value) {
+  set listFile(List<dynamic> value) {
     _$listFileAtom.reportWrite(value, super.listFile, () {
       super.listFile = value;
+    });
+  }
+
+  final _$listFileRemoveAtom = Atom(name: '_FormItemBase.listFileRemove');
+
+  @override
+  List<String> get listFileRemove {
+    _$listFileRemoveAtom.reportRead();
+    return super.listFileRemove;
+  }
+
+  @override
+  set listFileRemove(List<String> value) {
+    _$listFileRemoveAtom.reportWrite(value, super.listFileRemove, () {
+      super.listFileRemove = value;
     });
   }
 
@@ -119,7 +134,8 @@ item: ${item},
 text: ${text},
 textDescription: ${textDescription},
 textPrice: ${textPrice},
-listFile: ${listFile}
+listFile: ${listFile},
+listFileRemove: ${listFileRemove}
     ''';
   }
 }

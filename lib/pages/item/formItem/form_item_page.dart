@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:brasil_fields/brasil_fields.dart';
 import 'package:ficos_app/components/ButtonActionPrimary.dart';
 import 'package:ficos_app/components/Input.dart';
+import 'package:ficos_app/config/variables.dart';
 import 'package:ficos_app/models/item.dart';
 import 'package:ficos_app/models/itemTransition.dart';
 import 'package:ficos_app/pages/item/formItem/form_item_controller.dart';
@@ -32,10 +33,32 @@ class _FormItemPageState extends ModularState<FormItemPage, FormItemController> 
   void initState() {
     super.initState();
     this.controller.item = widget.itemEdit;
+    if (widget.itemEdit.imgs != null && widget.itemEdit.imgs.length > 0) {
+      List<dynamic> tste = [];
+      widget.itemEdit.imgs.forEach((e) {
+        print(e.nameImg);
+
+        tste.add('${API}api/v1/img/item/${e.nameImg}');
+      });
+      this.controller.listFile = tste;
+    }
     this.controller.textDescription =
       new TextEditingController(text: widget.itemEdit.description);
     this.controller.textPrice =
       new TextEditingController(text: widget.itemEdit.price);
+  }
+
+  _showImg(dynamic e) {
+    if (e is File) {
+      return FileImage(e);
+    }
+    return NetworkImage(e);
+  }
+  _showImgWidget(dynamic e) {
+    if (e is File) {
+      return FileImage(e);
+    }
+    return Image.network(e);
   }
 
   @override
@@ -112,7 +135,7 @@ class _FormItemPageState extends ModularState<FormItemPage, FormItemController> 
                                                       child: Column(
                                                         mainAxisSize: MainAxisSize.min,
                                                         children: <Widget>[
-                                                          Image.file(this.controller.listFile[index]),
+                                                          _showImgWidget(this.controller.listFile[index]),
                                                           FlatButton(
                                                             child: Text("Excluir"),
                                                             textColor: Colors.red,
@@ -128,7 +151,7 @@ class _FormItemPageState extends ModularState<FormItemPage, FormItemController> 
                                               },
                                               child: CircleAvatar(
                                                 radius: 50,
-                                                backgroundImage: FileImage(this.controller.listFile[index]),
+                                                backgroundImage: _showImg(this.controller.listFile[index]),
                                                 child: Container(
                                                     color: Color.fromRGBO(255, 255, 255, 0.4),
                                                     alignment: Alignment.center,

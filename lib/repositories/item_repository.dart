@@ -33,6 +33,22 @@ class ItemRepository {
     }
   }
 
-  
+  Future<Item> updateItem(Item item, String idPromptDelivery, String idItem) async {
+    Response response = await _httpClient.put(
+        "$url$idPromptDelivery/item?id=$idItem",
+        item
+    );
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      Item updateItem = Item.fromJson(response.data);
+      return updateItem;
+    }
+  }
+
+  Future<String> deleteImgItem(String nameFile, String idItem) async {
+    Response response = await this._httpClient.delete("${urlImg}${idItem}?img=${nameFile}");
+    return 'ok';
+  }
 
 }

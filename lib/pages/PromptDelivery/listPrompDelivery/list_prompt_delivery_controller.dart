@@ -13,14 +13,14 @@ abstract class _ListPromptDeliveryBase with Store {
   final repositoryPromptDelivery = Modular.get<PromptDeliveryRepository>();
 
   _ListPromptDeliveryBase() {
-    _getListPromptDelivery();
+    getListPromptDelivery();
   }
 
   @observable
   List<dynamic> listApresentation = [];
 
   @action
-  _getListPromptDelivery() async {
+  getListPromptDelivery() async {
     try {
       List<dynamic> promptDelivery = await repositoryPromptDelivery.getFindAll();
       this.listApresentation = promptDelivery;
@@ -44,7 +44,10 @@ abstract class _ListPromptDeliveryBase with Store {
 
   @action
   editPromptDelivery(@required PromptDelivery promptDelivery, @required int index) {
-    Modular.to.pushNamed('/editPromptDelivery', arguments: promptDelivery);
+    Modular.to.pushNamed('/editPromptDelivery', arguments: promptDelivery)
+      .then((value) =>{
+        this.getListPromptDelivery()
+      });
   }
 
 }

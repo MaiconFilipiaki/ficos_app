@@ -40,6 +40,37 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     });
   }
 
+  final _$latitudeUserAtom = Atom(name: '_EditPromptDeliveryBase.latitudeUser');
+
+  @override
+  double get latitudeUser {
+    _$latitudeUserAtom.reportRead();
+    return super.latitudeUser;
+  }
+
+  @override
+  set latitudeUser(double value) {
+    _$latitudeUserAtom.reportWrite(value, super.latitudeUser, () {
+      super.latitudeUser = value;
+    });
+  }
+
+  final _$longitudeUserAtom =
+      Atom(name: '_EditPromptDeliveryBase.longitudeUser');
+
+  @override
+  double get longitudeUser {
+    _$longitudeUserAtom.reportRead();
+    return super.longitudeUser;
+  }
+
+  @override
+  set longitudeUser(double value) {
+    _$longitudeUserAtom.reportWrite(value, super.longitudeUser, () {
+      super.longitudeUser = value;
+    });
+  }
+
   final _$latitudePromptAtom =
       Atom(name: '_EditPromptDeliveryBase.latitudePrompt');
 
@@ -246,6 +277,8 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     return '''
 controllerMap: ${controllerMap},
 textTeste: ${textTeste},
+latitudeUser: ${latitudeUser},
+longitudeUser: ${longitudeUser},
 latitudePrompt: ${latitudePrompt},
 longitudePrompt: ${longitudePrompt},
 reach: ${reach},
