@@ -136,7 +136,7 @@ abstract class _EditPromptDeliveryBase with Store {
 
   @action
   positionOfUser() async {
-    Position position = await Geolocator().getLastKnownPosition(desiredAccuracy: LocationAccuracy.high);
+    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
     print('AQUI MAICON' + this.latitudePrompt.toString() + this.longitudeUser.toString() + reach.toString());
     if (this.latitudePrompt != null && this.longitudeUser != null && reach != null) {
       this.latitudeUser = this.latitudePrompt;

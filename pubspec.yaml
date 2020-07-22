@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
+  intl: ^0.15.6
   dio: ^3.0.9
   image_picker: ^0.6.7+2
   brasil_fields: ^0.2.0
@@ -31,6 +32,7 @@ dependencies:
   mobx: ^1.0.2+1
   validadores: ^0.0.1
   flutter_secure_storage: ^3.3.3
+  carousel_pro: ^1.0.0
   flutter:
     sdk: flutter
 

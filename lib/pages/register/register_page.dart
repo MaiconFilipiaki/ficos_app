@@ -108,7 +108,7 @@ class _RegisterPageState extends ModularState<RegisterPage, RegisterController> 
                                           msg: "Campo obrigatorio"
                                       )
                                           .minLength(4)
-                                          .maxLength(10)
+                                          .maxLength(20)
                                           .valido(valor);
                                     },
                                   ),

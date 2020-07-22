@@ -50,5 +50,15 @@ class ItemRepository {
     Response response = await this._httpClient.delete("${urlImg}${idItem}?img=${nameFile}");
     return 'ok';
   }
+  
+  Future<Item> getFindById(int id) async {
+    Response response = await _httpClient.get("${url}null/item?id=${id}");
+    if (response.statusCode != 200) {
+      throw Exception();
+    } else {
+      Item item = Item.fromJson(response.data);
+      return item;
+    }
+  }
 
 }

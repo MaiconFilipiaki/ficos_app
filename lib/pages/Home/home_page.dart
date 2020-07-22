@@ -1,4 +1,7 @@
 import 'package:ficos_app/pages/Announcement/Announcement.dart';
+import 'package:ficos_app/pages/Catalog/catalog_page.dart';
+import 'package:ficos_app/pages/Catalog/catalog_controller.dart';
+import 'package:ficos_app/pages/Catalog/catalog_controller.dart';
 import 'package:ficos_app/pages/Home/home_controller.dart';
 import 'package:ficos_app/pages/MyAnnouncements/MyAnnouncements.dart';
 import 'package:ficos_app/pages/PromptDelivery/listPrompDelivery/list_prompt_delivery_page.dart';
@@ -48,7 +51,7 @@ class _HomeState extends ModularState<Home, HomeController> with SingleTickerPro
           controller: controllerTab,
 
           children: <Widget>[
-            new Announcement(),
+            new Catalog(),
             new MyAnnouncements(),
             new ListPrompDelivery(),
             new MyAnnouncements(),
