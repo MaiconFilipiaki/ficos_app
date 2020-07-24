@@ -26,6 +26,7 @@ class LoginRepositoty {
     } else {
       await storage.write(key: "token", value: response.data["token"]);
       await storage.write(key: "email", value: user.email);
+      await storage.write(key: "username", value: response.data["username"]);
       await storage.write(key: "password", value: user.password);
       return response.data["token"];
     }

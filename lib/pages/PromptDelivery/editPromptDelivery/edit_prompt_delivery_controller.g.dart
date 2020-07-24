@@ -224,12 +224,13 @@ mixin _$EditPromptDeliveryController on _EditPromptDeliveryBase, Store {
     });
   }
 
-  final _$getPromptDeliveryAsyncAction =
-      AsyncAction('_EditPromptDeliveryBase.getPromptDelivery');
+  final _$getPromptDeliveryByServerAsyncAction =
+      AsyncAction('_EditPromptDeliveryBase.getPromptDeliveryByServer');
 
   @override
-  Future getPromptDelivery() {
-    return _$getPromptDeliveryAsyncAction.run(() => super.getPromptDelivery());
+  Future getPromptDeliveryByServer() {
+    return _$getPromptDeliveryByServerAsyncAction
+        .run(() => super.getPromptDeliveryByServer());
   }
 
   final _$changeRadiusSlideAsyncAction =

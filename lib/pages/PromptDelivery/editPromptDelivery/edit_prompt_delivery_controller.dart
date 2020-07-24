@@ -17,7 +17,7 @@ abstract class _EditPromptDeliveryBase with Store {
 
 
   _EditPromptDeliveryBase(){
-//    this.positionOfUser();
+    this.getPromptDeliveryByServer();
   }
 
 
@@ -52,7 +52,7 @@ abstract class _EditPromptDeliveryBase with Store {
   String textError = "";
 
   @observable
-  List<dynamic> itens = [];
+  List<dynamic> itens = List();
 
   @observable
   CameraPosition cameraPositionMap = CameraPosition(
@@ -61,7 +61,7 @@ abstract class _EditPromptDeliveryBase with Store {
   );
 
   @action
-  getPromptDelivery() async {
+  getPromptDeliveryByServer() async {
     if (this.id != null) {
       try {
         PromptDelivery promptDeliveryFromServer = await this.repositoryPromptDelivery.getById(this.id.toString());

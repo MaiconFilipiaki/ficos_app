@@ -8,6 +8,7 @@ import 'package:ficos_app/models/item.dart';
 class ItemRepository {
 
   final HttpClient _httpClient = HttpClient();
+  final Dio _dio = Dio();
   final url = "${API}api/v1/prompt_delivery/";
   final urlImg = "${API}api/v1/img/item/";
 
@@ -46,13 +47,21 @@ class ItemRepository {
     }
   }
 
+  Future deleteItem(String idItem, String idPromptDelivery) async {
+    Response response = await _httpClient.delete("$url$idPromptDelivery/item?id=$idItem");
+    if (response.statusCode != 200) {
+      throw Exception();
+    }
+    return;
+  }
+
   Future<String> deleteImgItem(String nameFile, String idItem) async {
     Response response = await this._httpClient.delete("${urlImg}${idItem}?img=${nameFile}");
     return 'ok';
   }
   
   Future<Item> getFindById(int id) async {
-    Response response = await _httpClient.get("${url}null/item?id=${id}");
+    Response response = await _dio.get("${url}null/item?id=${id}");
     if (response.statusCode != 200) {
       throw Exception();
     } else {

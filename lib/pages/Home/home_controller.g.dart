@@ -9,6 +9,21 @@ part of 'home_controller.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$HomeController on _HomeControllerBase, Store {
+  final _$pageAtom = Atom(name: '_HomeControllerBase.page');
+
+  @override
+  Widget get page {
+    _$pageAtom.reportRead();
+    return super.page;
+  }
+
+  @override
+  set page(Widget value) {
+    _$pageAtom.reportWrite(value, super.page, () {
+      super.page = value;
+    });
+  }
+
   final _$verifyTokenAsyncAction =
       AsyncAction('_HomeControllerBase.verifyToken');
 
@@ -17,10 +32,35 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$verifyTokenAsyncAction.run(() => super.verifyToken());
   }
 
+  final _$_HomeControllerBaseActionController =
+      ActionController(name: '_HomeControllerBase');
+
+  @override
+  dynamic showPage() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.showPage');
+    try {
+      return super.showPage();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic showPageTeste() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.showPageTeste');
+    try {
+      return super.showPageTeste();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
-
+page: ${page}
     ''';
   }
 }

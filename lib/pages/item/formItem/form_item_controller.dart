@@ -4,6 +4,7 @@ import 'package:ficos_app/models/item.dart';
 import 'package:ficos_app/models/itemTransition.dart';
 import 'package:ficos_app/repositories/item_repository.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mobx/mobx.dart';
@@ -28,10 +29,24 @@ abstract class _FormItemBase with Store {
   TextEditingController textPrice = new TextEditingController();
 
   @observable
+  TextEditingController textDescriptionComplet = new TextEditingController();
+
+  @observable
   List<dynamic> listFile = [];
 
   @observable
+  String itemCategoriaSelect;
+
+  @observable
   List<String> listFileRemove = [];
+
+  @observable
+  List<DropdownMenuItem<String>> listaItensCategoria = [
+    DropdownMenuItem(child: Text("Automovel"), value: "auto"),
+    DropdownMenuItem(child: Text("Eletronicos"), value: "eletronicos"),
+    DropdownMenuItem(child: Text("Cosmeticos"), value: "cosmeticos"),
+    DropdownMenuItem(child: Text("Doces"), value: "doce"),
+  ];
 
   @action
   Future addImage() async {
@@ -61,6 +76,8 @@ abstract class _FormItemBase with Store {
       if (item.id == null) {
         Item newItem = new Item(
             description: textDescription.text,
+            descriptionComplet: textDescriptionComplet.text,
+            categorie: itemCategoriaSelect,
             price: textPrice.text
         );
         Item itemResponse = await repositoryItem.registerItem(
@@ -72,7 +89,9 @@ abstract class _FormItemBase with Store {
       } else {
         Item updateItem = new Item(
           description: textDescription.text,
-          price: textPrice.text
+          price: textPrice.text,
+          descriptionComplet: textDescriptionComplet.text,
+          categorie: itemCategoriaSelect,
         );
         Item itemResponse = await repositoryItem.updateItem(
           updateItem,
@@ -86,6 +105,15 @@ abstract class _FormItemBase with Store {
     }
   }
 
+  @action
+  Future deleteItem() async {
+    try {
+      await repositoryItem.deleteItem(item.id.toString(), item.idPromptDelivery.toString());
+      Modular.to.pop("Teste");
+    } catch (err) {
+      print(err);
+    }
+  }
 
   @action
   Future sendFile(String idItem) async {

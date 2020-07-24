@@ -42,6 +42,7 @@ abstract class _DetailsProductControlllerBase with Store {
       imgs = imgsMount;
       descricao = item.description;
       price = "R\$${item.price}";
+      descricaoExplicativa = item.descriptionComplet;
     } catch (err) {
       print(err);
     }

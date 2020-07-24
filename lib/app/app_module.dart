@@ -24,6 +24,7 @@ import 'package:ficos_app/repositories/item_repository.dart';
 import 'package:ficos_app/repositories/login_repository.dart';
 import 'package:ficos_app/repositories/prompt_delivery_repository.dart';
 import 'package:ficos_app/repositories/register_repository.dart';
+import 'package:ficos_app/repositories/user_repository.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -44,7 +45,8 @@ class AppModule extends MainModule {
     Bind((i) => FormItemController()),
     Bind((i) => CatalogRepository()),
     Bind((i) => CatalogController()),
-    Bind((i) => DetailsProductController())
+    Bind((i) => DetailsProductController()),
+    Bind((i) => UserRepository()),
   ];
 
   @override
@@ -67,7 +69,10 @@ class AppModule extends MainModule {
         child: (_, args) => FormItemPage(itemEdit: args.data)
     ),
     Router("/catalog", child: (_, args) => Catalog()),
-    Router("/detailsProduct", child: (_, args) => DetailsProductPage(idItem: args.data))
+    Router(
+        "/detailsProduct",
+        child: (_, args) => DetailsProductPage(idItem: args.data)
+    ),
   ];
 
 }

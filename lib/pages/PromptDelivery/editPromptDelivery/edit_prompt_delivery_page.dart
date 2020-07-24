@@ -33,13 +33,14 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
   @override
   void initState() {
     super.initState();
-    this.controller.getPromptDelivery();
+
     this.controller.textTeste = new TextEditingController(text: widget.promptEdit.name);
     print('AQUI MAICON 1' +  widget.promptEdit.reach.toString());
     this.controller.latitudePrompt = widget.promptEdit.latitude;
     this.controller.longitudePrompt = widget.promptEdit.longitude;
     this.controller.reach = widget.promptEdit.reach;
     this.controller.id = widget.promptEdit.id;
+    this.controller.getPromptDeliveryByServer();
     this.controller.positionOfUser();
   }
 
@@ -214,12 +215,30 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: <Widget>[
-                              Text(
-                                "EDITAR",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 15
+                              GestureDetector(
+                                child: Text(
+                                  "EDITAR",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15
+                                  ),
                                 ),
+                                onTap: () {
+                                  Modular.to.pushNamed(
+                                      '/formItem',
+                                      arguments: ItemTransition(
+                                        idPromptDelivery: this.controller.id,
+                                        price: e.price,
+                                        description: e.description,
+                                        categorie: e.categorie,
+                                        descriptionComplet: e.descriptionComplet,
+                                        id: e.id,
+                                        imgs: e.imgs,
+                                      )
+                                  ).then((value) => {
+                                    this.controller.getPromptDeliveryByServer()
+                                  });
+                                },
                               ),
                               IconButton(
                                 icon: Icon(
@@ -236,7 +255,9 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
                                         id: e.id,
                                         imgs: e.imgs,
                                       )
-                                  );
+                                  ).then((value) => {
+                                    this.controller.getPromptDeliveryByServer()
+                                  });
                                 },
                               )
                             ],
@@ -265,7 +286,7 @@ class _EditPromptDeliveryPageState extends ModularState<EditPromptDeliveryPage, 
                   idPromptDelivery: this.controller.id,
                 )
             ).then((value) => {
-              this.controller.getPromptDelivery()
+              this.controller.getPromptDeliveryByServer()
             });
         },
       ),

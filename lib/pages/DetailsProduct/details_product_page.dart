@@ -75,6 +75,12 @@ class _DetailsProductPageState extends ModularState<DetailsProductPage, DetailsP
                           fontSize: 18,
                           fontWeight: FontWeight.bold
                         ),
+                      ),
+                      Text(
+                        this.controller.descricaoExplicativa,
+                        style: TextStyle(
+                            fontSize: 18,
+                        ),
                       )
                     ],
                   ),

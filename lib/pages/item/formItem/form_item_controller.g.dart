@@ -69,6 +69,23 @@ mixin _$FormItemController on _FormItemBase, Store {
     });
   }
 
+  final _$textDescriptionCompletAtom =
+      Atom(name: '_FormItemBase.textDescriptionComplet');
+
+  @override
+  TextEditingController get textDescriptionComplet {
+    _$textDescriptionCompletAtom.reportRead();
+    return super.textDescriptionComplet;
+  }
+
+  @override
+  set textDescriptionComplet(TextEditingController value) {
+    _$textDescriptionCompletAtom
+        .reportWrite(value, super.textDescriptionComplet, () {
+      super.textDescriptionComplet = value;
+    });
+  }
+
   final _$listFileAtom = Atom(name: '_FormItemBase.listFile');
 
   @override
@@ -84,6 +101,22 @@ mixin _$FormItemController on _FormItemBase, Store {
     });
   }
 
+  final _$itemCategoriaSelectAtom =
+      Atom(name: '_FormItemBase.itemCategoriaSelect');
+
+  @override
+  String get itemCategoriaSelect {
+    _$itemCategoriaSelectAtom.reportRead();
+    return super.itemCategoriaSelect;
+  }
+
+  @override
+  set itemCategoriaSelect(String value) {
+    _$itemCategoriaSelectAtom.reportWrite(value, super.itemCategoriaSelect, () {
+      super.itemCategoriaSelect = value;
+    });
+  }
+
   final _$listFileRemoveAtom = Atom(name: '_FormItemBase.listFileRemove');
 
   @override
@@ -96,6 +129,22 @@ mixin _$FormItemController on _FormItemBase, Store {
   set listFileRemove(List<String> value) {
     _$listFileRemoveAtom.reportWrite(value, super.listFileRemove, () {
       super.listFileRemove = value;
+    });
+  }
+
+  final _$listaItensCategoriaAtom =
+      Atom(name: '_FormItemBase.listaItensCategoria');
+
+  @override
+  List<DropdownMenuItem<String>> get listaItensCategoria {
+    _$listaItensCategoriaAtom.reportRead();
+    return super.listaItensCategoria;
+  }
+
+  @override
+  set listaItensCategoria(List<DropdownMenuItem<String>> value) {
+    _$listaItensCategoriaAtom.reportWrite(value, super.listaItensCategoria, () {
+      super.listaItensCategoria = value;
     });
   }
 
@@ -120,6 +169,13 @@ mixin _$FormItemController on _FormItemBase, Store {
     return _$registerItemAsyncAction.run(() => super.registerItem());
   }
 
+  final _$deleteItemAsyncAction = AsyncAction('_FormItemBase.deleteItem');
+
+  @override
+  Future<dynamic> deleteItem() {
+    return _$deleteItemAsyncAction.run(() => super.deleteItem());
+  }
+
   final _$sendFileAsyncAction = AsyncAction('_FormItemBase.sendFile');
 
   @override
@@ -134,8 +190,11 @@ item: ${item},
 text: ${text},
 textDescription: ${textDescription},
 textPrice: ${textPrice},
+textDescriptionComplet: ${textDescriptionComplet},
 listFile: ${listFile},
-listFileRemove: ${listFileRemove}
+itemCategoriaSelect: ${itemCategoriaSelect},
+listFileRemove: ${listFileRemove},
+listaItensCategoria: ${listaItensCategoria}
     ''';
   }
 }

@@ -24,6 +24,36 @@ mixin _$CatalogController on _CatalogControllerBase, Store {
     });
   }
 
+  final _$nameAtom = Atom(name: '_CatalogControllerBase.name');
+
+  @override
+  String get name {
+    _$nameAtom.reportRead();
+    return super.name;
+  }
+
+  @override
+  set name(String value) {
+    _$nameAtom.reportWrite(value, super.name, () {
+      super.name = value;
+    });
+  }
+
+  final _$tokenSaveAtom = Atom(name: '_CatalogControllerBase.tokenSave');
+
+  @override
+  String get tokenSave {
+    _$tokenSaveAtom.reportRead();
+    return super.tokenSave;
+  }
+
+  @override
+  set tokenSave(String value) {
+    _$tokenSaveAtom.reportWrite(value, super.tokenSave, () {
+      super.tokenSave = value;
+    });
+  }
+
   final _$getListItemAsyncAction =
       AsyncAction('_CatalogControllerBase.getListItem');
 
@@ -32,10 +62,34 @@ mixin _$CatalogController on _CatalogControllerBase, Store {
     return _$getListItemAsyncAction.run(() => super.getListItem());
   }
 
+  final _$getUsernameAsyncAction =
+      AsyncAction('_CatalogControllerBase.getUsername');
+
+  @override
+  Future getUsername() {
+    return _$getUsernameAsyncAction.run(() => super.getUsername());
+  }
+
+  final _$getTokenAsyncAction = AsyncAction('_CatalogControllerBase.getToken');
+
+  @override
+  Future getToken() {
+    return _$getTokenAsyncAction.run(() => super.getToken());
+  }
+
+  final _$logoutAsyncAction = AsyncAction('_CatalogControllerBase.logout');
+
+  @override
+  Future logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
   @override
   String toString() {
     return '''
-listItens: ${listItens}
+listItens: ${listItens},
+name: ${name},
+tokenSave: ${tokenSave}
     ''';
   }
 }
