@@ -44,6 +44,10 @@ abstract class _ListPromptDeliveryBase with Store {
 
   @action
   editPromptDelivery(@required PromptDelivery promptDelivery, @required int index) {
+    PromptDelivery promptDelivery = listApresentation[index];
+    List<dynamic> newList = listApresentation;
+    newList.remove(PromptDelivery);
+    listApresentation = newList;
     Modular.to.pushNamed('/editPromptDelivery', arguments: promptDelivery)
       .then((value) =>{
         this.getListPromptDelivery()
