@@ -53,23 +53,23 @@ class AppModule extends MainModule {
   Widget get bootstrap => AppWidget();
 
   @override
-  List<Router> get routers => [
-    Router("/", child: (_, args) => Home()),
-    Router("/login", child: (_, args) => Login()),
-    Router("/register", child: (_, args) => RegisterPage()),
-    Router("/listPrompt", child: (_, args) => ListPrompDelivery()),
-    Router("/formPrompt", child: (_, args) => FormPromptDeliveryPage()),
-    Router(
+  List<ModularRouter> get routers => [
+    ModularRouter("/", child: (_, args) => Home()),
+    ModularRouter("/login", child: (_, args) => Login()),
+    ModularRouter("/register", child: (_, args) => RegisterPage()),
+    ModularRouter("/listPrompt", child: (_, args) => ListPrompDelivery()),
+    ModularRouter("/formPrompt", child: (_, args) => FormPromptDeliveryPage()),
+    ModularRouter(
         "/editPromptDelivery",
         child: (_, args) =>
             EditPromptDeliveryPage(promptEdit: args.data)
     ),
-    Router(
+    ModularRouter(
         "/formItem",
         child: (_, args) => FormItemPage(itemEdit: args.data)
     ),
-    Router("/catalog", child: (_, args) => Catalog()),
-    Router(
+    ModularRouter("/catalog", child: (_, args) => Catalog()),
+    ModularRouter(
         "/detailsProduct",
         child: (_, args) => DetailsProductPage(idItem: args.data)
     ),

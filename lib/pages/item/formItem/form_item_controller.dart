@@ -50,7 +50,7 @@ abstract class _FormItemBase with Store {
 
   @action
   Future addImage() async {
-    var imgSelected = await ImagePicker().getImage(source: ImageSource.gallery);
+    var imgSelected = await ImagePicker.pickImage(source: ImageSource.gallery);
     if (imgSelected != null) {
       List<dynamic> newListFile = this.listFile;
       newListFile.add(File(imgSelected.path));
